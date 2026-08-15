@@ -42,16 +42,17 @@ app.get('/api/getWall', async (req, res) => {
       headers: {
         'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64) Chrome 120'
       }
-    });
+try {
     const decryptData = decrypt(resp.data.data);
     const wallList = JSON.parse(decryptData);
     res.json({code:200, list: wallList.list});
-  } catch (err)
-    res.json({code:-1, msg:'壁纸数据获取失败'});
+  } catch (err) {
+    res.json({code:-1, msg:'哦豁，获取失败'});
   }
 });
 // Render自动识别端口，禁止写死3000
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, ()=>{
+});
   console.log(`服务运行端口：${PORT}`);
 })
